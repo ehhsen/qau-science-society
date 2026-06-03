@@ -1,796 +1,1317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QAU Science Society - Magazine & Research</title>
-    <style>
-        /* =====================================================
-           GLOBAL STYLING & RESET
-           ===================================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
-
-        body {
-            font-family: Arial, Helvetica, 'Segoe UI', sans-serif;
-            background-color: #F9F9F9;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* =====================================================
-           SECTION A: STICKY NAVBAR & HERO BANNER
-           ===================================================== */
-
-        /* Navbar Container */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background-color: #000000;
-            width: 100%;
-            padding: 1.2rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .navbar-left {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .logo-placeholder {
-            width: 50px;
-            height: 50px;
-            background-color: #333;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: bold;
-            font-size: 12px;
-            text-align: center;
-        }
-
-        .navbar-title {
-            color: #FFFFFF;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #CCCCCC;
-        }
-
-        .search-icon {
-            width: 24px;
-            height: 24px;
-            background-color: #555;
-            border-radius: 3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .search-icon:hover {
-            background-color: #777;
-        }
-
-        .search-icon svg {
-            width: 14px;
-            height: 14px;
-            stroke: #FFFFFF;
-            fill: none;
-            stroke-width: 2;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23222" width="1200" height="600"/><g stroke="%23444" stroke-width="1" opacity="0.3"><line x1="0" y1="0" x2="100" y2="100"/><line x1="200" y1="0" x2="300" y2="100"/><line x1="400" y1="0" x2="500" y2="100"/><line x1="600" y1="0" x2="700" y2="100"/><line x1="800" y1="0" x2="900" y2="100"/><line x1="1000" y1="0" x2="1100" y2="100"/></g></svg>');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .hero-banner {
-            background-color: #444444;
-            color: #FFFFFF;
-            padding: 2rem 4rem;
-            font-size: 2.8rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .hero-description {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #FFFFFF;
-            padding: 1.5rem 2.5rem;
-            font-size: 1rem;
-            line-height: 1.8;
-            max-width: 800px;
-            text-align: center;
-            border-left: 4px solid #555;
-        }
-
-        /* =====================================================
-           SECTION B: MAGAZINE GRID SECTION
-           ===================================================== */
-
-        .magazine-section {
-            padding: 4rem 3rem;
-            background-color: #FFFFFF;
-        }
-
-        .magazine-header {
-            font-size: 2.2rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 3rem;
-            color: #000000;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-            max-width: 1400px;
-        }
-
-        .grid-card {
-            text-align: center;
-        }
-
-        .card-icon {
-            width: 160px;
-            height: 160px;
-            background-color: #2C2C2C;
-            border-radius: 8px;
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card-icon svg {
-            width: 100px;
-            height: 100px;
-            stroke: #FFFFFF;
-            fill: none;
-            stroke-width: 2;
-        }
-
-        .card-icon.atom svg {
-            fill: #FFFFFF;
-        }
-
-        .card-label {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            margin-bottom: 0.8rem;
-            color: #000000;
-        }
-
-        .card-subtitle {
-            font-size: 0.95rem;
-            color: #777777;
-            font-style: italic;
-            line-height: 1.6;
-        }
-
-        /* =====================================================
-           SECTION C: FOOTER & SOCIAL MEDIA
-           ===================================================== */
-
-        .footer {
-            background-color: #555555;
-            color: #FFFFFF;
-            padding: 2.5rem 2rem;
-            text-align: center;
-        }
-
-        .footer-copyright {
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-            margin-bottom: 2rem;
-            color: #E0E0E0;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            background-color: #000000;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            background-color: #333333;
-            transform: scale(1.08);
-        }
-
-        .social-icon svg {
-            width: 28px;
-            height: 28px;
-            stroke: #FFFFFF;
-            fill: #FFFFFF;
-            stroke-width: 1;
-        }
-
-        /* =====================================================
-           SECTION D: DOWNLOAD & SHARE MAGAZINE
-           ===================================================== */
-
-        .download-section {
-            background-color: #F9F9F9;
-            padding: 4rem 3rem;
-        }
-
-        .download-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .download-header {
-            font-size: 2.2rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 3rem;
-            color: #000000;
-            text-align: center;
-        }
-
-        .download-content {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-        }
-
-        .download-box,
-        .share-box {
-            background-color: #FFFFFF;
-            padding: 2.5rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .download-box:hover,
-        .share-box:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            transform: translateY(-4px);
-        }
-
-        .download-icon,
-        .share-icon {
-            width: 120px;
-            height: 120px;
-            background-color: #2C2C2C;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .download-icon svg,
-        .share-icon svg {
-            width: 80px;
-            height: 80px;
-        }
-
-        .download-title,
-        .share-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            margin-bottom: 1rem;
-            color: #000000;
-        }
-
-        .download-description,
-        .share-description {
-            font-size: 0.95rem;
-            color: #777777;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .download-btn {
-            background-color: #000000;
-            color: #FFFFFF;
-            padding: 0.9rem 2rem;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .download-btn:hover {
-            background-color: #333333;
-            transform: scale(1.05);
-        }
-
-        .share-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .share-btn {
-            background-color: #2C2C2C;
-            color: #FFFFFF;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .share-btn:hover {
-            background-color: #000000;
-            transform: scale(1.05);
-        }
-
-        /* =====================================================
-           RESPONSIVE DESIGN UPDATES FOR SECTION D
-           ===================================================== */
-
-        @media (max-width: 1024px) {
-            .grid-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .download-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .navbar {
-                padding: 1rem 2rem;
-            }
-
-            .navbar-right {
-                gap: 1.5rem;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .grid-container {
-                grid-template-columns: 1fr;
-            }
-
-            .navbar {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-
-            .navbar-right {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-
-            .hero-banner {
-                font-size: 2rem;
-                padding: 1.5rem 2rem;
-            }
-
-            .magazine-section {
-                padding: 2rem;
-            }
-
-            .magazine-header {
-                font-size: 1.8rem;
-            }
-
-            .card-icon {
-                width: 120px;
-                height: 120px;
-            }
-
-            .card-icon svg {
-                width: 75px;
-                height: 75px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .navbar-title {
-                font-size: 0.85rem;
-                letter-spacing: 1px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                height: 400px;
-            }
-
-            .hero-banner {
-                font-size: 1.5rem;
-                padding: 1rem 1.5rem;
-            }
-
-            .hero-description {
-                font-size: 0.9rem;
-                padding: 1rem;
-            }
-
-            .magazine-section {
-                padding: 1.5rem;
-            }
-
-            .magazine-header {
-                font-size: 1.4rem;
-            }
-
-            .grid-card {
-                padding: 1rem 0;
-            }
-
-            .social-icons {
-                gap: 1rem;
-            }
-
-            .social-icon {
-                width: 45px;
-                height: 45px;
-            }
-
-            .social-icon svg {
-                width: 24px;
-                height: 24px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QAU Science Society</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --dark2: #1a1a1a;
+    --dark3: #222222;
+    --mid: #333333;
+    --border: #2a2a2a;
+    --border-bright: #3d3d3d;
+    --white: #f0ede8;
+    --white-dim: #a8a5a0;
+    --white-faint: #555250;
+    --accent: #e8e0d4;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background-color: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAVBAR ── */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 3rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-logo-box {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-bright);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-logo-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-top-color: var(--white-dim);
+    border-right-color: var(--white-dim);
+    animation: spin 8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .nav-logo-box img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+
+  .nav-wordmark {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .nav-wordmark span {
+    display: block;
+    font-size: 0.55rem;
+    color: var(--white-dim);
+    letter-spacing: 0.2em;
+    font-weight: 400;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--white-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--white);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-search {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border-bright);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+  }
+
+  .nav-search:hover {
+    border-color: var(--white-dim);
+    background: var(--dark3);
+  }
+
+  .nav-search svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--white-dim);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 88vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.35;
+  }
+
+  .hero-grid-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 30% 50%, transparent 40%, var(--black) 100%);
+  }
+
+  .hero-left {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 5rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--white-faint);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--white-faint);
+  }
+
+  .hero-h1 {
+    font-family: var(--mono);
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 2rem;
+  }
+
+  .hero-h1 em {
+    font-style: normal;
+    color: var(--white-dim);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--white-dim);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--white);
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .hero-cta::after {
+    content: '↓';
+    transition: transform 0.2s;
+  }
+
+  .hero-cta:hover {
+    background: var(--accent);
+    gap: 1.25rem;
+  }
+
+  .hero-cta:hover::after { transform: translateY(2px); }
+
+  .hero-right {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+  }
+
+  .hero-atom {
+    position: relative;
+    width: 280px;
+    height: 280px;
+  }
+
+  .orbit {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--border-bright);
+    border-radius: 50%;
+    animation: orbitSpin 12s linear infinite;
+  }
+
+  .orbit:nth-child(2) {
+    inset: 30px;
+    border-color: var(--mid);
+    animation-duration: 8s;
+    animation-direction: reverse;
+  }
+
+  .orbit:nth-child(3) {
+    inset: 60px;
+    animation-duration: 20s;
+  }
+
+  .orbit-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--white);
+    border-radius: 50%;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .orbit-dot.dim { background: var(--white-dim); width: 5px; height: 5px; top: -2.5px; }
+
+  @keyframes orbitSpin { to { transform: rotate(360deg); } }
+
+  .atom-core {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: var(--dark3);
+    border: 1px solid var(--border-bright);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .atom-core-inner {
+    width: 24px;
+    height: 24px;
+    background: var(--white);
+    border-radius: 50%;
+    opacity: 0.9;
+  }
+
+  .hero-stat-strip {
+    position: absolute;
+    bottom: 3rem;
+    left: 5rem;
+    right: 4rem;
+    display: flex;
+    gap: 3rem;
+    z-index: 2;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .hero-stat-num {
+    font-family: var(--mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .hero-stat-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+  }
+
+  /* ── DOWNLOAD SECTION ── */
+  .download {
+    padding: 6rem 5rem;
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download::before {
+    content: 'DOWNLOAD';
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: var(--mono);
+    font-size: 6rem;
+    font-weight: 700;
+    color: var(--border);
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--white-faint);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--white-faint);
+  }
+
+  .section-h2 {
+    font-family: var(--mono);
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 3.5rem;
+  }
+
+  .download-card {
+    max-width: 600px;
+    background: var(--dark2);
+    border: 1px solid var(--border-bright);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .download-card:hover { border-color: var(--mid); }
+
+  .download-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--white), transparent);
+  }
+
+  .corner-cut {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 32px 32px 0;
+    border-color: transparent var(--black) transparent transparent;
+  }
+
+  .corner-cut-inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 31px 31px 0;
+    border-color: transparent var(--dark2) transparent transparent;
+  }
+
+  .download-inner {
+    padding: 2.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .download-pdf-icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 100px;
+    background: var(--dark3);
+    border: 1px solid var(--border-bright);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  }
+
+  .download-pdf-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background: var(--border-bright);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+  }
+
+  .pdf-letters {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--white);
+  }
+
+  .pdf-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 4px;
+  }
+
+  .pdf-line {
+    width: 36px;
+    height: 2px;
+    background: var(--mid);
+  }
+
+  .pdf-line.short { width: 24px; }
+
+  .download-info {
+    flex: 1;
+  }
+
+  .download-info h3 {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+    margin-bottom: 0.6rem;
+  }
+
+  .download-info p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--white-dim);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .download-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+  }
+
+  .meta-value {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--white-dim);
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--white);
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  .download-btn:hover {
+    background: var(--accent);
+    gap: 0.9rem;
+  }
+
+  .download-btn svg {
+    width: 13px;
+    height: 13px;
+    stroke: var(--black);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 4rem 5rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .footer-brand {}
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--white-faint);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-sub {
+    font-size: 0.8rem;
+    color: var(--white-faint);
+    font-weight: 300;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .soc {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border-bright);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+    position: relative;
+  }
+
+  .soc::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+
+  .soc:hover::before { transform: scaleX(1); }
+
+  .soc:hover { border-color: var(--white); color: var(--black); }
+
+  .soc svg {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.2s;
+  }
+
+  .footer-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 3rem 0 2rem;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-nav a {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-nav a:hover { color: var(--white-dim); }
+
+  .footer-tag {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--white-faint);
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { display: none; }
+    .hero-left { padding: 5rem 2rem; border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-stat-strip { left: 2rem; right: 2rem; bottom: 2rem; gap: 2rem; flex-wrap: wrap; }
+    .navbar { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .download { padding: 4rem 2rem; }
+    .download::before { display: none; }
+    .footer { padding: 3rem 2rem; }
+    .footer-inner { flex-direction: column; gap: 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-h1 { font-size: 1.9rem; }
+    .download-inner { flex-direction: column; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ── TABLE OF CONTENTS ── */
+  .toc {
+    padding: 6rem 5rem;
+    background: var(--black);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .toc::after {
+    content: 'CONTENTS';
+    position: absolute;
+    left: -1rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-family: var(--mono);
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--border);
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 980px;
+    margin-left: 4rem;
+  }
+
+  .toc-item {
+    background: var(--dark);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .toc-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    transition: background 0.2s;
+  }
+
+  .toc-item:hover { background: var(--dark2); }
+  .toc-item:hover::before { background: var(--white-dim); }
+
+  .toc-pg {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--white-faint);
+    min-width: 20px;
+    padding-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .toc-body {}
+
+  .toc-title {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .toc-author {
+    font-size: 0.68rem;
+    color: var(--white-faint);
+    font-weight: 300;
+  }
+
+  /* ── CREDITS ── */
+  .credits-line {
+    text-align: center;
+    padding: 1.2rem;
+    font-size: 0.75rem;
+    color: var(--white-faint);
+    font-weight: 300;
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.03em;
+  }
+
+  .credits-line a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    transition: color 0.2s;
+  }
+
+  .credits-line a:hover { color: var(--white); }
+
+  @media (max-width: 900px) {
+    .toc { padding: 4rem 2rem; }
+    .toc::after { display: none; }
+    .toc-grid { margin-left: 0; }
+  }
+
+  /* ── DOWNLOAD COUNTER ── */
+  #dl-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: opacity 0.3s;
+  }
+
+  #dl-count.loading { opacity: 0.4; }
+
+  .dl-live-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--white-dim);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.7); }
+  }
+
+  .dl-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--dark3);
+    border: 1px solid var(--border-bright);
+    padding: 0.35rem 0.75rem;
+    margin-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--white-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .dl-count-badge strong {
+    color: var(--white);
+    font-size: 0.75rem;
+  }
+</style>
 </head>
 <body>
 
-    <!-- ===============================================
-         SECTION A: STICKY NAVBAR & HERO BANNER
-         =============================================== -->
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-left">
+    <div class="nav-logo-box">
+      <img src="logo.png" alt="QSS Logo">
+    </div>
+    <div class="nav-wordmark">
+      QAU Science Society
+      <span>Quaid-i-Azam University</span>
+    </div>
+  </div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#download">Download</a></li>
+      <li><a href="#contents">Contents</a></li>
+      <li><a href="#socials">Socials</a></li>
+    </ul>
+    <button class="nav-search" aria-label="Search" onclick="alert('Search coming soon')">
+      <svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><line x1="14" y1="14" x2="20" y2="20"/></svg>
+    </button>
+  </div>
+</nav>
 
-    <nav class="navbar">
-        <div class="navbar-left">
-            <img src="logo.png" alt="QSS Logo" style="width: 50px; height: 50px; border-radius: 4px;">
-            <div class="navbar-title">QAU SCIENCE SOCIETY</div>
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-grid-bg"></div>
+
+  <div class="hero-left">
+    <div class="hero-tag">Est. QAU &mdash; Islamabad, Pakistan</div>
+    <h1 class="hero-h1">
+      Science.<br>
+      <em>Curiosity.</em><br>
+      Discovery.
+    </h1>
+    <p class="hero-desc">
+      Fostering scientific curiosity, innovation, and collaborative learning across all multi-disciplinary branches of science at Quaid-i-Azam University. Celebrating breakthrough research and the interconnected nature of exploration.
+    </p>
+    <a href="#download" class="hero-cta">Download Magazine</a>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-atom">
+      <div class="orbit"><div class="orbit-dot"></div></div>
+      <div class="orbit"><div class="orbit-dot dim"></div></div>
+      <div class="orbit"><div class="orbit-dot dim"></div></div>
+      <div class="atom-core"><div class="atom-core-inner"></div></div>
+    </div>
+  </div>
+
+  <div class="hero-stat-strip">
+    <div class="hero-stat">
+      <span class="hero-stat-num">2025</span>
+      <span class="hero-stat-label">Latest Edition</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">3+</span>
+      <span class="hero-stat-label">Science Disciplines</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">QAU</span>
+      <span class="hero-stat-label">Islamabad</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- TABLE OF CONTENTS -->
+<section class="toc" id="contents">
+  <div class="section-tag">2025 Edition</div>
+  <h2 class="section-h2" style="margin-left:4rem;margin-bottom:2.5rem;">Inside This<br>Issue</h2>
+  <div class="toc-grid reveal">
+    <div class="toc-item">
+      <span class="toc-pg">01</span>
+      <div class="toc-body">
+        <div class="toc-title">Horrors of the Science</div>
+        <div class="toc-author">Usman Sohail</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">04</span>
+      <div class="toc-body">
+        <div class="toc-title">Nobel Prize in Medicine &amp; Physiology</div>
+        <div class="toc-author">Zainab</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">05</span>
+      <div class="toc-body">
+        <div class="toc-title">Microbiome &amp; Mood Disorders</div>
+        <div class="toc-author">Bisma Khan</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">06</span>
+      <div class="toc-body">
+        <div class="toc-title">Microflora &amp; Its Role in Health</div>
+        <div class="toc-author">Warda Tahir</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">07</span>
+      <div class="toc-body">
+        <div class="toc-title">The CRISPR Revolution</div>
+        <div class="toc-author">Sameeha Baber</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">09</span>
+      <div class="toc-body">
+        <div class="toc-title">Health and Wellbeing</div>
+        <div class="toc-author">Rafia Shahid</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">10</span>
+      <div class="toc-body">
+        <div class="toc-title">Neurotechnology &amp; Human Intelligence</div>
+        <div class="toc-author">Rosheen Khadija</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">12</span>
+      <div class="toc-body">
+        <div class="toc-title">Health and Wellbeing</div>
+        <div class="toc-author">Walija Mariyum</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">14</span>
+      <div class="toc-body">
+        <div class="toc-title">Nobel Prize in Chemistry</div>
+        <div class="toc-author">Asadullah</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">16</span>
+      <div class="toc-body">
+        <div class="toc-title">Teflon and PFA</div>
+        <div class="toc-author">Unsa Hussain</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">18</span>
+      <div class="toc-body">
+        <div class="toc-title">Nobel Prize in Physics</div>
+        <div class="toc-author">M. Furqan</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">19</span>
+      <div class="toc-body">
+        <div class="toc-title">Evolution of Our Idea About Universe</div>
+        <div class="toc-author">Abdul Mujeeb</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">21</span>
+      <div class="toc-body">
+        <div class="toc-title">I Am SC26</div>
+        <div class="toc-author">Rabail Inshra Cheema</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">22</span>
+      <div class="toc-body">
+        <div class="toc-title">The Struggle of Pursuing PhD</div>
+        <div class="toc-author">Tufail Dawar</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">23</span>
+      <div class="toc-body">
+        <div class="toc-title">Personal Experience in Science</div>
+        <div class="toc-author">Hamna Samad</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">25</span>
+      <div class="toc-body">
+        <div class="toc-title">The Storyboard</div>
+        <div class="toc-author">&mdash;</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">27</span>
+      <div class="toc-body">
+        <div class="toc-title">Note from the Editor</div>
+        <div class="toc-author">&mdash;</div>
+      </div>
+    </div>
+    <div class="toc-item">
+      <span class="toc-pg">&mdash;</span>
+      <div class="toc-body">
+        <div class="toc-title">Team Behind QSS</div>
+        <div class="toc-author">&mdash;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="download" id="download">
+  <div class="section-tag">Magazine</div>
+  <h2 class="section-h2">Get the Latest<br>Edition</h2>
+
+  <div class="download-card reveal">
+    <div class="corner-cut"></div>
+    <div class="corner-cut-inner"></div>
+    <div class="download-inner">
+      <div class="download-pdf-icon">
+        <div class="pdf-letters">PDF</div>
+        <div class="pdf-lines">
+          <div class="pdf-line"></div>
+          <div class="pdf-line"></div>
+          <div class="pdf-line short"></div>
         </div>
-        <div class="navbar-right">
-            <ul class="nav-links">
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#magazine">MAGAZINE FIELDS</a></li>
-                <li><a href="#download">DOWNLOAD</a></li>
-                <li><a href="#socials">SOCIALS</a></li>
-            </ul>
-            <div class="search-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="10" cy="10" r="6"></circle>
-                    <line x1="14" y1="14" x2="20" y2="20"></line>
-                </svg>
-            </div>
+      </div>
+      <div class="download-info">
+        <h3>QSS Magazine</h3>
+        <p>Stay updated with cutting-edge research, scientific breakthroughs, and discoveries from across disciplines.</p>
+        <div class="download-meta">
+          <div class="meta-item">
+            <span class="meta-label">Format</span>
+            <span class="meta-value">PDF</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Edition</span>
+            <span class="meta-value">2025 Vol. I</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Language</span>
+            <span class="meta-value">English</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Downloads</span>
+            <span class="meta-value" id="dl-count">—</span>
+          </div>
         </div>
-    </nav>
+        <a href="Magazine_compressed.pdf" download="QAU-Science-Society-Magazine.pdf" class="download-btn" id="dl-btn" onclick="trackDownload()">
+          <svg viewBox="0 0 24 24"><path d="M12 3v13M8 12l4 4 4-4M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2"/></svg>
+          Download Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="hero">
-        <div class="hero-banner">QAU SCIENCE SOCIETY</div>
-        <div class="hero-description">
-            Fostering scientific curiosity, innovation, and collaborative learning across all multi-disciplinary branches of science at Quaid-i-Azam University. Celebrating breakthrough research, discovery, and the interconnected nature of scientific exploration.
-        </div>
-    </section>
+<!-- FOOTER -->
+<footer class="footer" id="socials">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-copy">© 2026 QAU Science Society</div>
+      <div class="footer-sub">Quaid-i-Azam University &mdash; Islamabad</div>
+    </div>
+    <div class="footer-socials">
 
-    <!-- ===============================================
-         SECTION B: MAGAZINE GRID SECTION
-         =============================================== -->
+      <!-- Email -->
+      <a href="mailto:ssqau@qau.edu.pk" class="soc" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 4l10 8 10-8"/>
+        </svg>
+      </a>
 
-    <section class="magazine-section" id="magazine">
-        <h2 class="magazine-header">MAGAZINE FIELDS</h2>
-        <div class="grid-container">
-            
-            <!-- Card 1: Natural Sciences -->
-            <div class="grid-card">
-                <div class="card-icon atom">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Atom nucleus -->
-                        <circle cx="50" cy="50" r="8" fill="white"/>
-                        <!-- Electron orbits -->
-                        <ellipse cx="50" cy="50" rx="28" ry="12" fill="none" stroke="white" stroke-width="2"/>
-                        <ellipse cx="50" cy="50" rx="28" ry="12" fill="none" stroke="white" stroke-width="2" transform="rotate(60 50 50)"/>
-                        <ellipse cx="50" cy="50" rx="28" ry="12" fill="none" stroke="white" stroke-width="2" transform="rotate(120 50 50)"/>
-                        <!-- Electrons -->
-                        <circle cx="78" cy="50" r="4" fill="white"/>
-                        <circle cx="36" cy="60" r="4" fill="white"/>
-                        <circle cx="36" cy="40" r="4" fill="white"/>
-                        <!-- Decorative orbits -->
-                        <circle cx="65" cy="30" r="2" fill="white"/>
-                        <circle cx="20" cy="50" r="2" fill="white"/>
-                    </svg>
-                </div>
-                <div class="card-label">NATURAL SCIENCES</div>
-                <div class="card-subtitle">Physics, Chemistry, & Earth Sciences</div>
-            </div>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/qaussociety/" target="_blank" class="soc" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
 
-            <!-- Card 2: Biological Sciences -->
-            <div class="grid-card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <!-- DNA Double Helix -->
-                        <path d="M 30 20 Q 50 30 70 20 Q 70 30 50 40 Q 30 50 30 60" fill="none" stroke="white" stroke-width="2.5"/>
-                        <path d="M 70 20 Q 50 30 30 20 Q 30 30 50 40 Q 70 50 70 60" fill="none" stroke="white" stroke-width="2.5"/>
-                        <path d="M 30 60 Q 50 70 70 60 Q 70 70 50 80 Q 30 90 30 100" fill="none" stroke="white" stroke-width="2.5"/>
-                        <path d="M 70 60 Q 50 70 30 60 Q 30 70 50 80 Q 70 90 70 100" fill="none" stroke="white" stroke-width="2.5"/>
-                        <!-- Connecting rungs -->
-                        <line x1="30" y1="30" x2="70" y2="30" stroke="white" stroke-width="1.5"/>
-                        <line x1="35" y1="40" x2="65" y2="40" stroke="white" stroke-width="1.5"/>
-                        <line x1="32" y1="50" x2="68" y2="50" stroke="white" stroke-width="1.5"/>
-                        <line x1="38" y1="60" x2="62" y2="60" stroke="white" stroke-width="1.5"/>
-                        <line x1="40" y1="70" x2="60" y2="70" stroke="white" stroke-width="1.5"/>
-                    </svg>
-                </div>
-                <div class="card-label">BIOLOGICAL SCIENCES</div>
-                <div class="card-subtitle">Botany, Zoology, & Microbiology</div>
-            </div>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/QAUSSociety/" target="_blank" class="soc" title="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+        </svg>
+      </a>
 
-            <!-- Card 3: Social Sciences -->
-            <div class="grid-card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Brain network nodes -->
-                        <circle cx="50" cy="50" r="12" fill="none" stroke="white" stroke-width="2"/>
-                        <circle cx="30" cy="35" r="6" fill="white"/>
-                        <circle cx="70" cy="35" r="6" fill="white"/>
-                        <circle cx="25" cy="60" r="6" fill="white"/>
-                        <circle cx="75" cy="60" r="6" fill="white"/>
-                        <circle cx="50" cy="75" r="6" fill="white"/>
-                        <!-- Connection lines -->
-                        <line x1="50" y1="50" x2="30" y2="35" stroke="white" stroke-width="1.5"/>
-                        <line x1="50" y1="50" x2="70" y2="35" stroke="white" stroke-width="1.5"/>
-                        <line x1="50" y1="50" x2="25" y2="60" stroke="white" stroke-width="1.5"/>
-                        <line x1="50" y1="50" x2="75" y2="60" stroke="white" stroke-width="1.5"/>
-                        <line x1="50" y1="50" x2="50" y2="75" stroke="white" stroke-width="1.5"/>
-                        <!-- Decorative connections -->
-                        <line x1="30" y1="35" x2="25" y2="60" stroke="white" stroke-width="1"/>
-                        <line x1="70" y1="35" x2="75" y2="60" stroke="white" stroke-width="1"/>
-                    </svg>
-                </div>
-                <div class="card-label">SOCIAL SCIENCES</div>
-                <div class="card-subtitle">Psychology, Behavioral Dynamics, & Society</div>
-            </div>
+      <!-- X / Twitter -->
+      <a href="https://x.com/QAUSSociety" target="_blank" class="soc" title="X (Twitter)">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
 
-        </div>
-    </section>
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/qaussociety/" target="_blank" class="soc" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+        </svg>
+      </a>
 
-    <!-- ===============================================
-         SECTION D: DOWNLOAD & SHARE MAGAZINE
-         =============================================== -->
+      <!-- WhatsApp -->
+      <a href="https://www.whatsapp.com/channel/0029VapIfR83wtb3pKp8gT06" target="_blank" class="soc" title="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+        </svg>
+      </a>
 
-    <section class="download-section" id="download">
-        <div class="download-container">
-            <h2 class="download-header">DOWNLOAD & SHARE MAGAZINE</h2>
-            
-            <div class="download-content">
-                <!-- Download Box -->
-                <div class="download-box">
-                    <div class="download-icon">
-                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="15" y="10" width="70" height="80" fill="none" stroke="white" stroke-width="2.5"/>
-                            <text x="50" y="45" font-size="24" font-weight="bold" fill="white" text-anchor="middle">PDF</text>
-                            <path d="M 50 55 L 50 75 M 45 70 L 50 75 L 55 70" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="download-title">GET LATEST EDITION</h3>
-                    <p class="download-description">Download the latest QSS Magazine in PDF format. Stay updated with cutting-edge research and discoveries.</p>
-                    <a href="Magazine_compressed.pdf" download="QAU-Science-Society-Magazine.pdf" class="download-btn">DOWNLOAD NOW</a>
-                </div>
+    </div>
+  </div>
 
-                <!-- Share Box -->
-                <div class="share-box">
-                    <div class="share-icon">
-                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="30" cy="30" r="10" fill="none" stroke="white" stroke-width="2.5"/>
-                            <circle cx="70" cy="30" r="10" fill="none" stroke="white" stroke-width="2.5"/>
-                            <circle cx="50" cy="65" r="10" fill="none" stroke="white" stroke-width="2.5"/>
-                            <line x1="38" y1="35" x2="62" y2="35" stroke="white" stroke-width="2"/>
-                            <line x1="36" y1="38" x2="50" y2="60" stroke="white" stroke-width="2"/>
-                            <line x1="64" y1="38" x2="50" y2="60" stroke="white" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h3 class="share-title">SHARE WITH COMMUNITY</h3>
-                    <p class="share-description">Share the magazine with friends, colleagues, and classmates through social media or direct messaging.</p>
-                    <div class="share-buttons">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=YOUR_GITHUB_PAGES_URL" target="_blank" class="share-btn facebook" title="Share on Facebook">Facebook</a>
-                        <a href="https://api.whatsapp.com/send?text=Check%20out%20QAU%20Science%20Society%20Magazine%20-%20YOUR_GITHUB_PAGES_URL" target="_blank" class="share-btn whatsapp" title="Share on WhatsApp">WhatsApp</a>
-                        <a href="mailto:?subject=QAU%20Science%20Society%20Magazine&body=Check%20this%20out:%20YOUR_GITHUB_PAGES_URL" class="share-btn email" title="Share via Email">Email</a>
-                        <button onclick="copyLink()" class="share-btn copy" title="Copy Link">Copy Link</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="footer-divider"></div>
 
-    <!-- ===============================================
-         SECTION C: FOOTER & SOCIAL MEDIA
-         =============================================== -->
+  <div class="footer-bottom">
+    <ul class="footer-nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#download">Download</a></li>
+      <li><a href="mailto:ssqau@qau.edu.pk">Contact</a></li>
+    </ul>
+    <div class="footer-tag">QAU/SS/2026</div>
+  </div>
+</footer>
 
-    <footer class="footer" id="socials">
-        <div class="footer-copyright">© 2026 QAU Science Society</div>
-        <div class="social-icons">
-            
-            <!-- Email -->
-            <a href="mailto:ssqau@qau.edu.pk" class="social-icon" title="Email">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
-                    <path d="M 2 4 L 12 12 L 22 4" fill="none" stroke="white" stroke-width="1.5"/>
-                </svg>
-            </a>
+<script>
 
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/qaussociety/" target="_blank" class="social-icon" title="Instagram">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="1.5"/>
-                    <circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.5"/>
-                    <circle cx="18" cy="6" r="1.5" fill="white"/>
-                </svg>
-            </a>
+  // ── DOWNLOAD COUNTER ──
+  const NAMESPACE = 'qaussociety';
+  const KEY = 'magazine-2025-downloads';
+  const API = 'https://api.countapi.xyz';
 
-            <!-- Facebook -->
-            <a href="https://www.facebook.com/QAUSSociety/" target="_blank" class="social-icon" title="Facebook">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
-                    <path d="M 10 12 L 10 20 M 14 12 L 14 20 M 14 12 L 17 12 Q 18 12 18 14 L 18 20 M 10 8 Q 10 6.5 11 6.5 Q 12 6.5 12 8 Q 12 6.5 13 6.5 Q 14 6.5 14 8" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-            </a>
+  async function fetchCount() {
+    try {
+      const res = await fetch(`${API}/get/${NAMESPACE}/${KEY}`);
+      const data = await res.json();
+      return data.value || 0;
+    } catch { return null; }
+  }
 
-            <!-- Twitter / X -->
-            <a href="https://x.com/QAUSSociety" target="_blank" class="social-icon" title="X (Twitter)">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 22 4 Q 21 6 19 7 L 19 8 Q 19 15 12 20 Q 6 20 3 17 Q 5 17 7 16 Q 4 15 3 12 Q 4 13 6 13 Q 3 11 3 8 Q 4 9 6 9 Q 4 8 4 6 Q 7 10 14 10 L 14 9 Q 14 7 16 5 Q 18 7 22 4" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </a>
+  async function hitCount() {
+    try {
+      const res = await fetch(`${API}/hit/${NAMESPACE}/${KEY}`);
+      const data = await res.json();
+      return data.value || 0;
+    } catch { return null; }
+  }
 
-            <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/qaussociety/" target="_blank" class="social-icon" title="LinkedIn">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="white" stroke-width="1.5"/>
-                    <path d="M 6 6 L 6 18 M 6 10 L 18 10 M 18 10 L 18 18 M 10 6 L 10 18" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                    <circle cx="6" cy="6" r="1.5" fill="white"/>
-                </svg>
-            </a>
+  function formatCount(n) {
+    if (n === null) return '—';
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+    return n.toString();
+  }
 
-            <!-- WhatsApp -->
-            <a href="https://www.whatsapp.com/channel/0029VapIfR83wtb3pKp8gT06" target="_blank" class="social-icon" title="WhatsApp">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 12 2 C 6.5 2 2 6.5 2 12 C 2 13.8 2.5 15.5 3.3 17 L 2 22 L 7 20.7 C 8.5 21.5 10.2 22 12 22 C 17.5 22 22 17.5 22 12 C 22 6.5 17.5 2 12 2 Z" fill="none" stroke="white" stroke-width="1.5"/>
-                    <path d="M 8 12 C 8 12 10 16 12 16 C 14 16 16 12 16 12" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-            </a>
+  function setCountDisplay(n) {
+    const el = document.getElementById('dl-count');
+    if (!el) return;
+    el.classList.remove('loading');
+    el.innerHTML = `<span class="dl-live-dot"></span>${formatCount(n)}`;
+  }
 
-        </div>
-    </footer>
+  async function trackDownload() {
+    const n = await hitCount();
+    setCountDisplay(n);
+  }
 
-    <script>
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-            });
-        });
+  // On load, just fetch (don't increment)
+  (async () => {
+    const el = document.getElementById('dl-count');
+    if (el) el.classList.add('loading');
+    const n = await fetchCount();
+    setCountDisplay(n);
+  })();
 
-        // Search icon interaction
-        document.querySelector('.search-icon').addEventListener('click', function() {
-            alert('Search functionality would be implemented here');
-        });
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
 
-        // Copy Link functionality
-        function copyLink() {
-            var url = window.location.href;
-            navigator.clipboard.writeText(url).then(function() {
-                alert('Link copied to clipboard!');
-            }).catch(function(err) {
-                alert('Failed to copy link');
-            });
-        }
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
-        // Share button functionality
-        document.querySelectorAll('.share-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                if (this.classList.contains('copy')) {
-                    copyLink();
-                }
-            });
-        });
-    </script>
-
+<div class="credits-line">
+  Made with &#x1F496; by <a href="https://github.com/ehhsen" target="_blank">ehhsen</a>
+</div>
 </body>
 </html>
