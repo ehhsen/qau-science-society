@@ -537,7 +537,7 @@
 
     <nav class="navbar">
         <div class="navbar-left">
-            <div class="logo-placeholder">QSS</div>
+            <img src="logo.png" alt="QSS Logo" style="width: 50px; height: 50px; border-radius: 4px;">
             <div class="navbar-title">QAU SCIENCE SOCIETY</div>
         </div>
         <div class="navbar-right">
@@ -664,7 +664,7 @@
                     </div>
                     <h3 class="download-title">GET LATEST EDITION</h3>
                     <p class="download-description">Download the latest QSS Magazine in PDF format. Stay updated with cutting-edge research and discoveries.</p>
-                    <a href="#" class="download-btn">DOWNLOAD NOW</a>
+                    <a href="Magazine_compressed.pdf" download="QAU-Science-Society-Magazine.pdf" class="download-btn">DOWNLOAD NOW</a>
                 </div>
 
                 <!-- Share Box -->
@@ -682,10 +682,10 @@
                     <h3 class="share-title">SHARE WITH COMMUNITY</h3>
                     <p class="share-description">Share the magazine with friends, colleagues, and classmates through social media or direct messaging.</p>
                     <div class="share-buttons">
-                        <a href="#" class="share-btn facebook" title="Share on Facebook">Facebook</a>
-                        <a href="#" class="share-btn whatsapp" title="Share on WhatsApp">WhatsApp</a>
-                        <a href="#" class="share-btn email" title="Share via Email">Email</a>
-                        <a href="#" class="share-btn copy" title="Copy Link">Copy Link</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=YOUR_GITHUB_PAGES_URL" target="_blank" class="share-btn facebook" title="Share on Facebook">Facebook</a>
+                        <a href="https://api.whatsapp.com/send?text=Check%20out%20QAU%20Science%20Society%20Magazine%20-%20YOUR_GITHUB_PAGES_URL" target="_blank" class="share-btn whatsapp" title="Share on WhatsApp">WhatsApp</a>
+                        <a href="mailto:?subject=QAU%20Science%20Society%20Magazine&body=Check%20this%20out:%20YOUR_GITHUB_PAGES_URL" class="share-btn email" title="Share via Email">Email</a>
+                        <button onclick="copyLink()" class="share-btn copy" title="Copy Link">Copy Link</button>
                     </div>
                 </div>
             </div>
@@ -770,6 +770,25 @@
         // Search icon interaction
         document.querySelector('.search-icon').addEventListener('click', function() {
             alert('Search functionality would be implemented here');
+        });
+
+        // Copy Link functionality
+        function copyLink() {
+            var url = window.location.href;
+            navigator.clipboard.writeText(url).then(function() {
+                alert('Link copied to clipboard!');
+            }).catch(function(err) {
+                alert('Failed to copy link');
+            });
+        }
+
+        // Share button functionality
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.classList.contains('copy')) {
+                    copyLink();
+                }
+            });
         });
     </script>
 
